@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Molecular</string>
+    <string name="title_activity_main">Molecular</string>
+    <string name="deposit">Change Direct Deposit</string>
+    <string name="atomic">atomic</string>
+</resources>
