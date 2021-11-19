@@ -22,7 +22,7 @@
     </style>
 
     <style name="ThemeOverlay.Molecular.FullscreenContainer" parent="">
-        <item name="fullscreenBackgroundColor">@color/purple_200</item>
+        <item name="fullscreenBackgroundColor">@color/atomic_dark_blue</item>
         <item name="fullscreenTextColor">@color/light_blue_A200</item>
     </style>
 </resources>

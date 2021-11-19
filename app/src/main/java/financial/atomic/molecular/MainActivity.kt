@@ -18,7 +18,7 @@ import financial.atomic.transact.receiver.TransactBroadcastReceiver
 import org.json.JSONObject
 
 class MainActivity : AppCompatActivity() {
-    private val token = ""
+    private val token = "INSERT-TOKEN-HERE"
     private val config = Config(
         publicToken = token,
         product = Config.Product.deposit,
@@ -64,9 +64,6 @@ class MainActivity : AppCompatActivity() {
                 }
                 override fun onInteraction(name: String, value: JSONObject) {
                     Log.d("APP", "RECEIVER interaction $name $value")
-                }
-                override fun onOpenURL(url: Uri, context: Context?) {
-                    Log.d("APP", "RECEIVER open_url $url")
                 }
             }
         )
