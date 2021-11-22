@@ -2,11 +2,6 @@ package financial.atomic.molecular
 
 import androidx.appcompat.app.AppCompatActivity
 import android.app.Activity
-import android.content.BroadcastReceiver
-import android.content.Context
-import android.content.Intent
-import android.content.IntentFilter
-import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -21,7 +16,7 @@ class MainActivity : AppCompatActivity() {
     private val token = "INSERT-TOKEN-HERE"
     private val config = Config(
         publicToken = token,
-        product = Config.Product.deposit,
+        product = Config.Product.DEPOSIT,
         environment = Config.Environment.SANDBOX,
         theme = Config.Theme(
             brandColor = "#5535FF",
@@ -56,31 +51,19 @@ class MainActivity : AppCompatActivity() {
         // 1. Using the TransactBroadcastReceiver class to receive all events
         Transact.registerReceiver(this,
             object: TransactBroadcastReceiver() {
-                override fun onClose(reason: String) {
-                    Log.d("APP", "RECEIVER close $reason")
+                override fun onClose(data: JSONObject) {
+                    Log.d("APP", "RECEIVER close $data")
                 }
-                override fun onFinish(taskId: String) {
-                    Log.d("APP", "RECEIVER finish $taskId")
+                override fun onFinish(data: JSONObject) {
+                    Log.d("APP", "RECEIVER finish $data")
                 }
-                override fun onInteraction(name: String, value: JSONObject) {
-                    Log.d("APP", "RECEIVER interaction $name $value")
+                override fun onInteraction(data: JSONObject) {
+                    Log.d("APP", "RECEIVER interaction $data")
                 }
             }
         )
 
-        // 2. Using a custom BroadcastReceiver to receive all events
-        registerReceiver(
-            object: BroadcastReceiver() {
-                override fun onReceive(context: Context?, intent: Intent?) {
-                    val extras = intent?.extras
-                    val type = Transact.Event.valueOf(extras?.getString("type")!!)
-                    Log.d("APP", "RECEIVER $type")
-                }
-            },
-            IntentFilter(Transact.ACTION_EVENT)
-        )
-
-        // 3. Using StartActivityForResult to get close and finish events
+        // 2. Using StartActivityForResult to get close and finish events
         val safr = ActivityResultContracts.StartActivityForResult()
         val transactResult = registerForActivityResult(safr) {
             when (it.resultCode) {

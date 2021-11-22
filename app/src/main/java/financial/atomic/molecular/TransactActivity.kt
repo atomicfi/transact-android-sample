@@ -15,7 +15,7 @@ class TransactActivity : AppCompatActivity() {
     private val token = localToken
     private val config = Config(
         publicToken = token,
-        product = Config.Product.deposit,
+        product = Config.Product.DEPOSIT,
         environment = Config.Environment.LOCAL,
         theme = Config.Theme(
             brandColor = "#5535FF",
