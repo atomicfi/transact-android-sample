@@ -1,11 +1,13 @@
 package financial.atomic.molecular
 
-import androidx.appcompat.app.AppCompatActivity
 import android.app.Activity
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import financial.atomic.molecular.databinding.ActivityMainBinding
 import financial.atomic.transact.Config
 import financial.atomic.transact.Transact
@@ -59,6 +61,9 @@ class MainActivity : AppCompatActivity() {
                 }
                 override fun onInteraction(data: JSONObject) {
                     Log.d("APP", "RECEIVER interaction $data")
+                }
+                override fun onDataRequest(data: JSONObject) {
+                    Log.d("APP", "RECEIVER data-request $data")
                 }
             }
         )
